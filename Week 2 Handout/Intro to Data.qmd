@@ -1,0 +1,226 @@
+---
+title: "Week 2: Intro to Data"
+author: "Chris Stantis"
+format: html
+editor: visual
+---
+
+# Week 2 Lecture Accompaniment Intro to Data and R's Data Structures
+
+Data structures are used to store and organize values.
+
+R provides many built-in data structures. Each is used to handle data in different ways:
+
+-   Vectors
+
+-   Lists
+
+-   Matrices
+
+-   Arrays
+
+-   Data Frames
+
+## Assignments
+
+But first, Let's start by practicing with assignments in R.
+
+```{r}
+#| label: assignment-1
+#| include: false
+x <- 3
+print (x)
+
+```
+
+What happened here? What showed up in your environment tab in the top right?
+
+Now, try this code:
+
+```{r}
+#| label: assignment-2
+#| include: false
+x = 3
+print (x)
+```
+
+What changed?
+
+Next, change the code in the chunk titled 'assignment-1' so that 3 -\> x. Finally, flip the x and the 3 in assignment-2 and save. Run both of the chunks now. What happens when you change the text?
+
+## Types of Data
+
+H'okay, in my lecture for this week, I talked about four types of data (if you don't remember them offhand, I suggest you look them up real quick). Now, R has different definitions of the data and how it works with it (this is a computer programming thing, not R's fault specifically).
+
+### Basic Data Types
+
+Basic data types in R can be divided into the following types:
+
+-   `numeric` - (10.5, 55, 787)
+
+-   `integer` - (1L, 55L, 100L, where the letter "L" declares this as an integer)
+
+-   `complex` - (9 + 3i, where "i" is the imaginary part)
+
+-   `character` (a.k.a. string) - ("k", "R is exciting", "FALSE", "11.5")
+
+-   `logical` (a.k.a. boolean) - (TRUE or FALSE)
+
+Practice: How do these five data types translate to the four I explained in the lecture?
+
+We can use the `class()` function to check the data type of a variable. Also, notice how I use the \# to create comments in R script, this is useful for documentation....
+
+```{r}
+#| label: data-type-1 
+#| #| include: false  
+
+# numeric 
+x <- 10.5 
+class(x)  
+
+# integer 
+x <- 1000L 
+class(x)  
+
+# complex 
+x <- 9i + 3 
+class(x)  
+
+# character/string 
+x <- "R is exciting" 
+class(x)  
+
+# logical/boolean 
+x <- TRUE 
+class(x)
+```
+
+## Vectors and Lists
+
+Most of the time, you'll work with dataframes in R. Vectors and lists do occasionally have utility in R so let's talk about them briefly. We'll skip matrices and arrays completely for now.
+
+### Vectors
+
+A vector is the most basic data structure in R. It contains a list of items of the same type.
+
+```{r}
+#| label: vector-1
+#| include: false
+
+# Vector of strings
+fruits <- c("banana", "apple", "orange")
+
+# Print fruits
+fruits
+```
+
+(Note that RStudio tried to help you identify colors- fun for plotting, kinda funny when talking about fruit and the word 'orange' is colored in.)
+
+Vectors *have* to be the same type of data, you can't mix characters and numeric data, for example. They can contain empty/missing values without breaking, often called 'NA'. Notice how these empty spots are written, without any quotes around `NA`.
+
+```{r}
+#| label: vector-2
+#| include: false
+
+# Vector of strings
+fruits <- c("papaya", "kiwi", NA, "plum")
+
+# Print fruits
+fruits
+```
+
+### Lists
+
+A list in R can contain many different data types inside it. A list is a collection of data which is ordered and changeable.
+
+To create a list, use the `list()` functi on:
+
+```{r}
+#| label: list-2
+#| include: false
+
+# list of strings, but with one number
+fruits <- c("papaya", "kiwi", NA, "plum", 5)
+
+# Print fruits
+fruits
+
+```
+
+I use lists a lot, to temporarily hold some information that I'm using to further manipulate my main data. Because lists can hold any type of information, this flexibility means they can get complicated pretty quickly. They can also nest within each other, which we're not even going to touch in the beginning of an intro course. But, you'll have some chances to play with small and quickly thrown together data thanks to vectors and lists.
+
+## Assignments
+
+If you simply enter the variable name or expression at the command prompt, R will print its value. You can use the print function for generic printing of any object- see what we did above when we ran the line `fruits`. Maybe try that now in the Console (lower left of your screen), just type in 'fruits'. See how the last input was printed? You can also preview the values that would be printed by looking in the top right of your screen, in Environment.
+
+If you want to save something, say, a value as a variable, you would use an assignment operator. An **assignment operator** assigns a value to a variable, so you're not having to create it every time.
+
+If you think back to last week's exercise in your first Quarto doc, you might remember the assignment operator arrow for reading that dataframe. If you had just typed out `read.csv("pone.0233912.s002.csv")`, you would have seen the csv in the console, but it wouldn't have been in your environment as a data frame.
+
+### Two main types of assignment operators
+
+\<-
+
+This directional arrow is the one you'll generally see me using, it's preferred in R. Typically, it's left-pointing, so you but what the assigned name is on the left, and what you're assigning on the right. Look up at the vectors and lists created to see the assignment operator in action. You can hit Alt and - at the same time in Windows, to create it quickly.
+
+=
+
+The equal sign works, but you need to put what it's going into in the left.
+
+```{r}
+#| label: operators
+#| include: false
+
+# let's play a bit
+x <- 3
+
+# Print x
+x
+
+# now the other way, flip the arrow above and see what happens
+# now, what if you do 3 -> x? It works, right? 
+# now, x = 3
+# finally, flip the x and 3. What happened? 
+
+
+```
+
+## Data Frames
+
+Data Frames are data displayed in a format as a table.
+
+Data Frames can have different types of data inside it. While the first column can be `character`, the second and third can be `numeric` or `logical`. However, each column should have the same type of data.
+
+Use the `data.frame()` function to create a data frame:
+
+```{r}
+# Create a data frame
+Data_Frame <- data.frame (
+  Training = c("Strength", "Stamina", "Other"),
+  Pulse = c(100, 150, 120),
+  Duration = c(60, 30, 45)
+)
+
+# Print the data frame
+Data_Frame
+```
+
+Use the `summary()` function to summarize the data from a Data Frame:
+
+```{r}
+summary(Data_Frame)
+```
+
+**Practice**: Make a data frame from scratch, with the following information.
+
+| Variable Name | Info in variable                                             |
+|---------------|--------------------------------------------------------------|
+| Species       | Pan paniscus, Gorilla gorilla, Homo sapiens, Cebus capucinus |
+| Ape           | TRUE, TRUE, TRUE, FALSE                                      |
+| Height        | 3.75, 5, 5.75, 2.75                                          |
+
+What did you call your data frame? Try to make it something easy to call. If you're juggling with multiple data frames in a single project, maybe you want to make sure each one's named descriptively.
+
+## Access Items
+
+We can use single brackets `[ ]`, double brackets `[[ ]]` or `$` to access columns from a data frame. I love a \$, myself.
